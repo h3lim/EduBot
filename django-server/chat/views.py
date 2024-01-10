@@ -1,3 +1,5 @@
+import base64
+import json
 import io
 import tempfile
 import whisper
@@ -39,16 +41,19 @@ def chat(request, lecture_name, video_name):
 # STT
 @require_http_methods(["POST"])
 def voice(request):
-    audio_file = request.FILES['audioFile']
-    audio_data = io.BytesIO(audio_file.read())
+    if request.method == 'POST':
+        data = json.loads(request.body)
+        # 포맷 변환
+        audio_data = base64.b64decode(data['message'])
+        audio_stream = io.BytesIO(audio_data)
 
-    # 임시 파일에 오디오 데이터를 쓰기
-    with tempfile.NamedTemporaryFile(delete=False, suffix='.mp3') as tmp_file:
-        tmp_file.write(audio_data.read())
-        temp_file_path = tmp_file.name
+        # 임시 파일에 오디오 데이터를 쓰기
+        with tempfile.NamedTemporaryFile(delete=False, suffix='.mp3') as tmp_file:
+            tmp_file.write(audio_stream.read())
+            temp_file_path = tmp_file.name
 
-    # 모델 로드 및 트랜스크립션 수행
-    model = whisper.load_model("base")
-    result = model.transcribe(temp_file_path)
+        # 모델 로드 및 트랜스크립션 수행
+        model = whisper.load_model("base")
+        result = model.transcribe(temp_file_path)
 
-    return JsonResponse({'status': 'success', 'text': result['text']})
+        return JsonResponse({'status': 'success', 'text': result['text']})

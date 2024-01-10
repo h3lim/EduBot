@@ -1,67 +1,56 @@
 window.addEventListener("DOMContentLoaded", function () {
-    const $audioEl = document.querySelector("audio");
-    const $btn = document.querySelector("#record-button");
+    let mediaRecorder;
+    let audioChunks = [];
+    var csrfToken = $("[name=csrfmiddlewaretoken]").val();
 
-    // 녹음중 상태 변수
+    async function startRecording() {
+        const mediaStream = await navigator.mediaDevices.getUserMedia({ audio: true });
+        mediaRecorder = new MediaRecorder(mediaStream);
+        mediaRecorder.ondataavailable = (event) => {
+            audioChunks.push(event.data);
+        };
+        mediaRecorder.start();
+    }
+
+    async function stopRecording() {
+        return new Promise((resolve) => {
+            mediaRecorder.onstop = async () => {
+                const audioBlob = new Blob(audioChunks, { type: "audio/wav" });
+                const reader = new FileReader();
+                reader.onloadend = () => {
+                    const base64AudioMessage = reader.result.split(",")[1];
+                    resolve(base64AudioMessage);
+                };
+                reader.readAsDataURL(audioBlob);
+            };
+            mediaRecorder.stop();
+        });
+    }
+
+    async function sendAudio() {
+        const base64AudioMessage = await stopRecording();
+        $.ajax({
+            type: "post",
+            async: false,
+            headers: { "X-CSRFToken": csrfToken },
+            url: "/chat/voice/",
+            data: JSON.stringify({ message: base64AudioMessage }),
+            processData: false,
+            contentType: false,
+        }).done(function (data) {
+            window.app.inputMessage = data.text;
+        });
+    }
+
     let isRecording = false;
+    const recordButton = document.getElementById("record-button");
 
-    // MediaRecorder 변수 생성
-    let mediaRecorder = null;
-
-    // 녹음 데이터 저장 배열
-    const audioArray = [];
-
-    $btn.addEventListener("click", async function (event) {
+    recordButton.addEventListener("click", () => {
         if (!isRecording) {
-            // 마이크 mediaStream 생성: Promise를 반환하므로 async/await 사용
-            const mediaStream = await navigator.mediaDevices.getUserMedia({ audio: true });
-
-            // MediaRecorder 생성
-            mediaRecorder = new MediaRecorder(mediaStream);
-
-            // 이벤트핸들러: 녹음 데이터 취득 처리
-            mediaRecorder.ondataavailable = (event) => {
-                audioArray.push(event.data); // 오디오 데이터가 취득될 때마다 배열에 담아둔다.
-            };
-
-            // 이벤트핸들러: 녹음 종료 처리 & 재생하기
-            mediaRecorder.onstop = (event) => {
-                // 녹음이 종료되면, 배열에 담긴 오디오 데이터(Blob)들을 합친다: 코덱도 설정해준다.
-                const blob = new Blob(audioArray, { type: "audio/ogg codecs=opus" });
-                audioArray.splice(0); // 기존 오디오 데이터들은 모두 비워 초기화한다.
-
-                var csrfToken = $("[name=csrfmiddlewaretoken]").val();
-                const audioFile = new File([blob], "filename.wav", { type: blob.type });
-
-                const formData = new FormData();
-                formData.append("audioFile", audioFile);
-
-                $.ajax({
-                    type: "post",
-                    async: false,
-                    headers: { "X-CSRFToken": csrfToken },
-                    url: "/chat/voice/",
-                    data: formData,
-                    processData: false, // FormData를 사용할 때 필요
-                    contentType: false,
-                }).done(function (data) {
-                    window.app.inputMessage = data.text;
-                });
-
-                // Blob 데이터에 접근할 수 있는 주소를 생성한다.
-                const blobURL = window.URL.createObjectURL(blob);
-
-                // audio엘리먼트로 재생한다.
-                $audioEl.src = blobURL;
-                $audioEl.play();
-            };
-
-            // 녹음 시작
-            mediaRecorder.start();
+            startRecording();
             isRecording = true;
         } else {
-            // 녹음 종료
-            mediaRecorder.stop();
+            sendAudio();
             isRecording = false;
         }
     });

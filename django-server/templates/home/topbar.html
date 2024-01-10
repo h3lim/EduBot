@@ -61,7 +61,7 @@
                           <a href="javascript:void(0)" class="dropdown-notifications-archive"><span class="bx bx-x"></span></a>
                         </div>
                         <script>
-                            const csrfToken = $('[name=csrfmiddlewaretoken]').val();
+                            var csrfToken = $('[name=csrfmiddlewaretoken]').val();
                             $('#message-{{ m.message.id }} .read-comment').click(()=> {
                                 $.ajax({
                                     type: 'post',
