@@ -5,15 +5,15 @@
     <div class="container px-4 px-lg-5 h-100" style="margin-right: 0; width: 50%">
       <div class="row gx-4 gx-lg-5 h-100 align-items-center justify-content-center text-center">
         <div class="col-lg-8 align-self-end">
-          <h1 class="text-white font-weight-bold">AI Student</h1>
+          <h1 class="text-white font-weight-bold">AI EduBot.</h1>
           <hr class="divider" />
         </div>
         <div class="col-lg-8 align-self-baseline" style="display: flex; flex-direction: column">
           {% if user.is_authenticated %}
-            <p class="text-white-75 mb-5" style="color: wheat">AI EDU는 교사가 되어 AI 학생에게 지식을 전달하고, 이를 통해 교육 방법의 효과를 직접 평가할 수 있는 공간을 제공합니다. 사용자는 다양한 교육 내용을 AI에게 가르치며, AI는 학습 과정을 거쳐 해당 과목에 대한 성취도 평가 시험을 치르게 됩니다.</p>
+            <p class="text-white-75 mb-5" style="color: wheat">AI EDU는 교사가 되어 AI EduBot에게 지식을 전달하고, 이를 통해 교육 방법의 효과를 직접 평가할 수 있는 공간을 제공합니다. 사용자는 다양한 교육 내용을 AI에게 가르치며, AI는 학습 과정을 거쳐 해당 과목에 대한 성취도 평가 시험을 치르게 됩니다.</p>
             <a class="btn btn-primary btn-xl" href="{% url 'account_login' %}">Start</a>
           {% else %}
-            <p class="text-white-75 mb-5" style="color: wheat">AI EDU는 교사가 되어 AI 학생에게 지식을 전달하고, 이를 통해 교육 방법의 효과를 직접 평가할 수 있는 공간을 제공합니다. 사용자는 다양한 교육 내용을 AI에게 가르치며, AI는 학습 과정을 거쳐 해당 과목에 대한 성취도 평가 시험을 치르게 됩니다.</p>
+            <p class="text-white-75 mb-5" style="color: wheat">AI EDU는 교사가 되어 AI EduBot에게 지식을 전달하고, 이를 통해 교육 방법의 효과를 직접 평가할 수 있는 공간을 제공합니다. 사용자는 다양한 교육 내용을 AI에게 가르치며, AI는 학습 과정을 거쳐 해당 과목에 대한 성취도 평가 시험을 치르게 됩니다.</p>
             <a class="btn btn-primary btn-xl" href="{% url 'account_login' %}">Start</a>
           {% endif %}
         </div>
