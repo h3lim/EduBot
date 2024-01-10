@@ -9,6 +9,7 @@ window.addEventListener("DOMContentLoaded", function () {
             inputMessage: "",
             // 서버의 답변을 기다리고 있는 메시지 수
             sentMessages: 0,
+            isVisibleRecorder: false
         },
         computed: {
             waitting: function () {
@@ -39,6 +40,9 @@ window.addEventListener("DOMContentLoaded", function () {
 
                 this.sentMessages += 1;
             },
+            toggleRecorder: function (e) {
+                this.isVisibleRecorder = !this.isVisibleRecorder;
+            }
         },
         mounted() {
             /* chat-history 드래그로 리스트 확인 기능 */
