@@ -60,6 +60,24 @@ window.addEventListener("DOMContentLoaded", function () {
     // 서버에서 메시지 수용
     chatSocket.onmessage = function (e) {
         const data = JSON.parse(e.data);
+        // 저장된 mp3파일 재생
+        var base64EncodedAudio = data.tts;
+        // Base64 디코딩
+        var binaryAudio = atob(base64EncodedAudio);
+        // ArrayBuffer로 변환
+        var arrayBuffer = new ArrayBuffer(binaryAudio.length);
+        var view = new Uint8Array(arrayBuffer);
+        for (var i = 0; i < binaryAudio.length; i++) {
+            view[i] = binaryAudio.charCodeAt(i);
+        }
+        // ArrayBuffer를 Blob으로 변환
+        var blob = new Blob([arrayBuffer], { type: 'audio/mpeg' });
+        // Blob을 URL로 생성
+        var audioUrl = URL.createObjectURL(blob);
+        // 오디오 플레이어 생성
+        var audio = new Audio(audioUrl);
+        // 오디오 재생
+        audio.play();
 
         // 가상DOM으로 전달
         app.statements.push({

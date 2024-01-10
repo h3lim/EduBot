@@ -7,6 +7,11 @@ from .models import Message
 import urllib.parse
 from config.settings import chatbot
 import numpy as np
+from gtts import gTTS
+from IPython.display import Audio
+from IPython.display import display
+import base64
+import io
 
 
 class ChatConsumer(WebsocketConsumer):
@@ -58,6 +63,18 @@ class ChatConsumer(WebsocketConsumer):
 
         print("query", message)
         print("answer", answer)
+        
+        
+        # gpt 답변 tts로 변환
+        tts = gTTS(answer, lang="ko")
+
+        # 음성을 메모리에 저장하지 않고 Base64로 변환
+        speech_data = io.BytesIO()
+        tts.write_to_fp(speech_data)
+        speech_data.seek(0)  # 파일 끝을 처음으로 돌립니다.
+
+        # Base64로 변환
+        base64_encoded = base64.b64encode(speech_data.read()).decode("utf-8")
 
         # Message 생성
         instance = Message(
@@ -67,4 +84,4 @@ class ChatConsumer(WebsocketConsumer):
         # 데이터베이스에 저장
         instance.save()
 
-        self.send(text_data=json.dumps({"message": answer}))
+        self.send(text_data=json.dumps({"message": answer, "tts":base64_encoded}))
