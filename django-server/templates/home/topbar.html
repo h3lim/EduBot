@@ -102,7 +102,8 @@
                         <div class="avatar avatar-online">
                             <!-- Moke condition for displaying user avatar -->
                             <span>{{ user }}　</span>
-                            <img src="{% static '/frontdoor/img/profile.png' %}" alt="프로필" class="w-px-40 rounded-circle" />
+                            {% static '/frontdoor/img/profile.png' as profile_default_image %}
+                            <img src="{{ user.avatar.url|default:profile_default_image }}" alt="프로필" class="w-px-40 rounded-circle">
                         </div>
                     </a>
 
@@ -113,8 +114,8 @@
                                     <div class="flex-shrink-0 me-3">
                                         <div class="avatar avatar-online">
                                             <!-- Moke condition for displaying user avatar -->
-
-                                            <img src="{% static '/frontdoor/img/profile.png' %}" alt="프로필" class="w-px-40 rounded-circle" />
+                                            {% static '/frontdoor/img/profile.png' as profile_default_image %}
+                                            <img src="{{ user.avatar.url|default:profile_default_image }}" alt="프로필" class="w-px-40 rounded-circle">
                                         </div>
                                     </div>
                                     <div class="flex-grow-1">
