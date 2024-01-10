@@ -40,6 +40,9 @@ window.addEventListener("DOMContentLoaded", function () {
         }).done(function (data) {
             window.app.inputMessage = data.text;
         });
+
+        let audio = new Audio("data:audio/wav;base64," + base64AudioMessage);
+        audio.play();
     }
 
     let isRecording = false;
