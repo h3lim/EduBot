@@ -211,7 +211,7 @@
                 },
             });
             window.addEventListener('beforeunload', function(event) {
-                const csrfToken = $('[name=csrfmiddlewaretoken]').val();
+                var csrfToken = $('[name=csrfmiddlewaretoken]').val();
 
                 $.ajax({
                     type: 'post',
