@@ -25,14 +25,12 @@
                     <!-- Account -->
                     <div class="card-body">
                         <div class="d-flex align-items-start align-items-sm-center gap-4">
-                            <img
-                                src="{% static 'frontdoor/img/profile.png' %}"
-                                alt="이미지 없음"
-                                class="d-block rounded"
-                                height="100"
-                                width="100"
-                                id="uploadedAvatar"
-                            />
+                            <div class="avatar-form">
+                                <label for="uploadAvatar">
+                                <input type="file" id="uploadAvatar" class="account-file-input" hidden="" accept="image/png, image/jpeg" name="avatar" />
+                                <img id="uploadedAvatar" class="d-block rounded" height="150" width="150" src="{% static 'frontdoor/img/blank profile.png' %}" title="이미지" />
+                                </label>
+                            </div>
                             <div class="button-wrapper">
                                 <label for="uploadAvatar" class="btn btn-primary me-2 mb-4" tabindex="0">
                                     <span class="d-none d-sm-block">사진 수정</span>
