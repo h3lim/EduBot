@@ -1,5 +1,5 @@
 window.addEventListener("DOMContentLoaded", function () {
-    var app = new Vue({
+    window.app = new Vue({
         delimiters: ["[[", "]]"],
         el: "#app-history",
         data: {
@@ -62,14 +62,14 @@ window.addEventListener("DOMContentLoaded", function () {
         const data = JSON.parse(e.data);
 
         // 가상DOM으로 전달
-        app.statements.push({
+        window.app.statements.push({
             type: "answer",
             message: data.message,
             avatar: "gpt_logo.svg",
             time: new Date().toLocaleTimeString(),
         });
 
-        app.sentMessages -= 1;
+        window.app.sentMessages -= 1;
     };
 
     chatSocket.onclose = function (e) {

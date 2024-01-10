@@ -30,7 +30,7 @@ window.addEventListener("DOMContentLoaded", function () {
                 const blob = new Blob(audioArray, { type: "audio/ogg codecs=opus" });
                 audioArray.splice(0); // 기존 오디오 데이터들은 모두 비워 초기화한다.
 
-                const csrfToken = $("[name=csrfmiddlewaretoken]").val();
+                var csrfToken = $("[name=csrfmiddlewaretoken]").val();
                 const audioFile = new File([blob], "filename.wav", { type: blob.type });
 
                 const formData = new FormData();
@@ -44,6 +44,8 @@ window.addEventListener("DOMContentLoaded", function () {
                     data: formData,
                     processData: false, // FormData를 사용할 때 필요
                     contentType: false,
+                }).done(function (data) {
+                    window.app.inputMessage = data.text;
                 });
 
                 // Blob 데이터에 접근할 수 있는 주소를 생성한다.

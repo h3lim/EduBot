@@ -3,6 +3,7 @@ import tempfile
 import whisper
 from django.shortcuts import render
 from django.http import HttpResponse
+from django.http import JsonResponse
 from django.views.decorators.clickjacking import xframe_options_exempt
 from django.views.decorators.http import require_http_methods
 from .models import Message
@@ -35,6 +36,7 @@ def chat(request, lecture_name, video_name):
     return render(request, "./chat/page.html", context)
 
 
+# STT
 @require_http_methods(["POST"])
 def voice(request):
     audio_file = request.FILES['audioFile']
@@ -48,4 +50,5 @@ def voice(request):
     # 모델 로드 및 트랜스크립션 수행
     model = whisper.load_model("base")
     result = model.transcribe(temp_file_path)
-    print(result["text"])
+
+    return JsonResponse({'status': 'success', 'text': result['text']})
