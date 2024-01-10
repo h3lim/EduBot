@@ -8,8 +8,6 @@ import urllib.parse
 from config.settings import chatbot
 import numpy as np
 from gtts import gTTS
-from IPython.display import Audio
-from IPython.display import display
 import base64
 import io
 
@@ -35,12 +33,11 @@ class ChatConsumer(WebsocketConsumer):
         # 참조 객체들
         video = Video.objects.get(id=video_id)
         user = User.objects.get(id=user_id)
-        
 
         text_data_json = json.loads(text_data)
         message = text_data_json["message"]
         message_time = datetime.now()
-        
+
         # history로 사용될 메시지
         selected_messages = []
         # 러프한 길이 제한
@@ -63,8 +60,7 @@ class ChatConsumer(WebsocketConsumer):
 
         print("query", message)
         print("answer", answer)
-        
-        
+
         # gpt 답변 tts로 변환
         tts = gTTS(answer, lang="ko")
 
@@ -84,4 +80,4 @@ class ChatConsumer(WebsocketConsumer):
         # 데이터베이스에 저장
         instance.save()
 
-        self.send(text_data=json.dumps({"message": answer, "tts":base64_encoded}))
+        self.send(text_data=json.dumps({"message": answer, "tts": base64_encoded}))
