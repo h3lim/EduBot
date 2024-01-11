@@ -28,7 +28,7 @@
                             <div class="avatar-form">
                                 <label for="uploadAvatar">
                                 <input type="file" id="uploadAvatar" class="account-file-input" hidden="" accept="image/png, image/jpeg" name="avatar" />
-                                <img id="uploadedAvatar" class="d-block rounded" height="150" width="150" src="{% static 'frontdoor/img/blank profile.png' %}" title="이미지" />
+                                <img id="uploadedAvatar" class="d-block rounded" height="150" width="150" src="{{ user.avatar.url }}" title="이미지" />
                                 </label>
                             </div>
                             <div class="button-wrapper">
