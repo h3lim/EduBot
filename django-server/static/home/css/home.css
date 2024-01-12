@@ -7,6 +7,10 @@
     height: 64px;
     margin-top: 12px;
   }
+
+  .fc-event-title.fc-sticky{
+    color: white !important;
+  }
   
   .app-brand-logo.demo svg {
     width: 22px;
