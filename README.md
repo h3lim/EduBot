@@ -155,7 +155,7 @@ STUDYCLUB
 
 ### 데이터베이스
 
-- **ORACLE Database**: 사용자, 게시글, 댓글, 퀴즈 등 정보 저장
+- **ORACLE Database**: 사용자, 게시글, 댓글, 퀴즈 등 정보 저장
 
 ### 빌드 도구
 
