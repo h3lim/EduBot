@@ -1,6 +1,6 @@
 # STUDYCLUB
 
-STUDYCLUB은 실시간 화상 회의, 채팅, 자유게시판 및 퀴즈 기능을 제공하는 웹 애플리케이션입니다. 사용자는 OAuth를 통해 소셜 로그인을 할 수 있으며, 스터디 룸을 생성하여 화상 회의와 채팅을 진행하거나 게시판과 퀴즈 기능을 통해 커뮤니케이션을 할 수 있습니다.
+STUDYCLUB은 실시간 화상 회의, 채팅, 자유게시판 및 퀴즈 기능을 통해 스터디 활동을 제공하는 웹 애플리케이션입니다. 사용자는 OAuth를 통해 소셜 로그인을 할 수 있으며, 스터디 룸을 생성하여 화상 회의와 채팅을 진행하거나 퀴즈 기능을 통해 스터디 활동을 진행 할 수 있습니다.  
 
 ## 목차
 - [프로젝트 구조](#프로젝트-구조)
@@ -133,34 +133,32 @@ STUDYCLUB
 
 - **Java (Spring Boot)**: 애플리케이션 로직 및 서버 구축
 - **Spring MVC**: RESTful API 제공 및 웹 기능 구현
-- **Spring Security (OAuth)**: 소셜 로그인 기능 구현
-- **MyBatis**: 데이터베이스 접근을 위한 매퍼 프레임워크
-- **AOP (Aspect-Oriented Programming)**: 토큰 만료 처리를 위한 AOP 적용
+- **Spring Security (OAuth)**: 
+- **MyBatis**: 
+- **AOP (Aspect-Oriented Programming)**: 
 
 ### 프론트엔드
 
-- **HTML5, CSS3, JavaScript**: 웹 인터페이스 및 스타일링
-- **WebSocket**: 실시간 채팅 및 화상 회의 지원
-
+- **HTML5, CSS3, JavaScript**: 
+- **WebSocket**: 
 ### API
 
-- **Google OAuth API**: 구글 계정을 통한 OAuth 인증
-- **Kakao OAuth API**: 카카오 계정을 통한 OAuth 인증
-- **Naver OAuth API**: 네이버 계정을 통한 OAuth 인증
+- **Google OAuth API**: 
+- **Kakao OAuth API**: 
+- **Naver OAuth API**: 
 
 ### 서버
 
-- **Apache Tomcat**: 웹 애플리케이션 서버
-- **SSE (Server-Sent Events)**: 실시간 알림 및 채팅 기능 구현
+- **Apache Tomcat**: 
+- **SSE (Server-Sent Events)**: 
 
 ### 데이터베이스
 
-- **ORACLE Database**: 사용자, 게시글, 댓글, 퀴즈 등 정보 저장
+- **ORACLE Database**: 
 
 ### 빌드 도구
 
-- **Maven**: 프로젝트 의존성 및 빌드 관리
-
+- **Maven**: 
 ---
 
 ## 참고 사항
