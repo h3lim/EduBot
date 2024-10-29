@@ -133,32 +133,32 @@ STUDYCLUB
 
 - **Java (Spring Boot)**: 애플리케이션 로직 및 서버 구축
 - **Spring MVC**: RESTful API 제공 및 웹 기능 구현
-- **Spring Security (OAuth)**: 
-- **MyBatis**: 
-- **AOP (Aspect-Oriented Programming)**: 
+- **Spring Security (OAuth)** 
+- **MyBatis** 
+- **AOP (Aspect-Oriented Programming)** 
 
 ### 프론트엔드
 
-- **HTML5, CSS3, JavaScript**: 
-- **WebSocket**: 
+- **HTML5, CSS3, JavaScript** 
+- **WebSocket** 
 ### API
 
-- **Google OAuth API**: 
-- **Kakao OAuth API**: 
-- **Naver OAuth API**: 
+- **Google OAuth API** 
+- **Kakao OAuth API** 
+- **Naver OAuth API** 
 
 ### 서버
 
-- **Apache Tomcat**: 
-- **SSE (Server-Sent Events)**: 
+- **Apache Tomcat** 
+- **SSE (Server-Sent Events)** 
 
 ### 데이터베이스
 
-- **ORACLE Database**: 
+- **ORACLE Database** 
 
 ### 빌드 도구
 
-- **Maven**: 
+- **Maven** 
 ---
 
 ## 참고 사항
