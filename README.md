@@ -131,8 +131,8 @@ STUDYCLUB
 
 ### 백엔드
 
-- **Java (Spring Boot)**: 애플리케이션 로직 및 서버 구축
-- **Spring MVC**: RESTful API 제공 및 웹 기능 구현
+- **Java (Spring Boot)**
+- **Spring MVC**
 - **Spring Security (OAuth)** 
 - **MyBatis** 
 - **AOP (Aspect-Oriented Programming)** 
